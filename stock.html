@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lista towarów - KLOCKI.net.pl</title>
-<meta name="description" content="Lista towarów dostępnych w KLOCKI.net.pl po zamknięciu działalności.">
+<meta name="description" content="Lista towarów dostępnych w wyprzedaży KLOCKI.net.pl.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
@@ -12,13 +12,13 @@
 :root{
   --bg:#F2F5FA; --ink:#14213D; --muted:#4A5772; --line:#D5DCEA;
   --red:#C8102E; --yellow:#F5B700; --blue:#2563C9; --green:#1F8A5B;
-  --panel:#FFFFFF; --on-red:#FFFFFF; --head-bg:#E8EDF6;
+  --panel:#FFFFFF; --head-bg:#E6ECF7;
   --head:"Bricolage Grotesque","Trebuchet MS",Arial,sans-serif;
   --body:"Figtree","Segoe UI",Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){
-  :root{--bg:#0F1626; --ink:#EEF2FA; --muted:#A9B4CC; --line:#26314A; --panel:#17203A;
-        --red:#E0364F; --yellow:#F5B700; --blue:#4C8BF0; --green:#34B27D; --head-bg:#1E2946}
+  :root{--bg:#0F1626; --ink:#EEF2FA; --muted:#A9B4CC; --line:#26314A; --panel:#17203A; --head-bg:#202B48;
+        --red:#E0364F; --yellow:#F5B700; --blue:#4C8BF0; --green:#34B27D}
 }
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
@@ -29,32 +29,43 @@ header{padding:28px 0 0;font-family:var(--head);font-weight:800;font-size:1.25re
 header a{color:inherit;text-decoration:none}
 header span{color:var(--red)}
 
-.back{display:inline-block;margin:28px 0 0;color:var(--blue);font-weight:600;text-decoration:none;padding:4px 0}
+.back{display:inline-block;margin:28px 0 0;color:var(--blue);font-weight:600;text-decoration:none;padding:6px 0}
 .back:hover{text-decoration:underline}
 .back:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
 
-h1{font-family:var(--head);font-weight:800;font-size:clamp(2rem,6vw,3.5rem);line-height:1.05;letter-spacing:-.02em;margin:20px 0 14px}
-.lead{color:var(--muted);max-width:56ch;margin:0 0 32px}
+h1{font-family:var(--head);font-weight:800;font-size:clamp(2rem,6vw,3.25rem);line-height:1.05;letter-spacing:-.02em;margin:16px 0 12px}
+.lead{color:var(--muted);margin:0 0 32px;max-width:56ch}
 
-.panel{background:var(--panel);border:1px solid var(--line);border-left:8px solid var(--yellow);border-radius:10px;padding:8px}
+.contact{display:flex;flex-wrap:wrap;gap:12px 32px;margin:0 0 32px;padding:20px 24px;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+.contact h2{flex:1 1 100%;font-family:var(--head);font-weight:800;font-size:1.25rem;line-height:1.2;margin:0}
+.contact p{margin:0}
+.contact .label{display:block;font-size:.9rem;color:var(--muted)}
+.contact a{color:var(--blue);font-weight:600;font-size:1.15rem;text-decoration:none}
+.contact a:hover{text-decoration:underline}
+.contact a:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+.contact .hours{flex:1 1 100%;font-size:.95rem;color:var(--muted)}
+.contact .hours a{font-size:inherit}
+.contact .mapbar{flex:1 1 100%;display:flex;flex-wrap:wrap;align-items:center;gap:4px 24px}
+.contact .maptoggle{font:inherit;font-size:.95rem;font-weight:600;color:var(--blue);background:none;border:0;padding:4px 0;cursor:pointer}
+.contact .maptoggle:hover{text-decoration:underline}
+.contact .maptoggle:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+.contact .mapbar a{font-size:.95rem}
+.contact .map[hidden]{display:none}
+.contact .map{display:block;width:100%;height:240px;margin-top:10px;border:1px solid var(--line);border-radius:8px;background:var(--head-bg)}
+
+.box{background:var(--panel);border:1px solid var(--line);border-left:8px solid var(--yellow);border-radius:10px;overflow:hidden}
 .scroll{overflow-x:auto}
-table{border-collapse:collapse;width:100%;min-width:520px}
-th,td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:480px}
+th,td{padding:12px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
 th{font-family:var(--head);font-weight:700;background:var(--head-bg);white-space:nowrap}
 tr:last-child td{border-bottom:0}
 tbody tr:hover td{background:var(--head-bg)}
+.msg{padding:24px;color:var(--muted)}
+#status{font-size:.9rem;color:var(--muted);margin:12px 0 0}
 
-#status{font-size:.95rem;color:var(--muted);margin:14px 0 0}
-.empty{padding:24px 14px;color:var(--muted)}
-
-.cta{margin:48px 0 56px;max-width:62ch}
-.cta p{margin:0 0 14px}
-.btn{display:inline-block;background:var(--red);color:var(--on-red);text-decoration:none;font-weight:600;
-  font-size:1.05rem;padding:14px 26px;border-radius:8px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.2)}
-.btn:hover{filter:brightness(1.08)}
-.btn:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
-
-footer{border-top:1px solid var(--line);padding:22px 0 32px;font-size:.9rem;color:var(--muted)}
+footer{margin-top:48px;border-top:1px solid var(--line);padding:22px 0 32px;font-size:.9rem;color:var(--muted)}
+footer a{color:var(--blue);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -63,34 +74,41 @@ footer{border-top:1px solid var(--line);padding:22px 0 32px;font-size:.9rem;colo
 
   <main>
     <a class="back" href="index.html">← Wróć na stronę główną</a>
-
     <h1>Lista towarów</h1>
     <p class="lead">Towary, które zostały nam po zamknięciu działalności. Lista odświeża się automatycznie.</p>
 
-    <div class="panel">
-      <div class="scroll"><div id="tabela"><p class="empty">Ładowanie…</p></div></div>
-    </div>
-    <p id="status" role="status"></p>
-
-    <section class="cta">
-      <p>Aby kupić bezpośrednio napisz na adres: u24after@gmail.com</p>
-      <a class="btn" href="index.html">Wróć na stronę główną</a>
+    <section class="contact" aria-labelledby="kontakt">
+      <h2 id="kontakt">Kontakt w sprawie zakupu</h2>
+      <p><span class="label">E-mail</span><a href="mailto:u24after@gmail.com">u24after@gmail.com</a></p>
+      <p><span class="label">Telefon</span><a href="tel:+48532737137">+48 532 737 137</a></p>
+      <p class="hours">Prosimy dzwonić w godzinach 16:00–20:00.</p>
+      <p class="hours">Odbiór osobisty po wcześniejszym umówieniu:<br>Poznań, Osiedle Kopernika, ul. Keplera 8.</p>
+      <div class="mapbar">
+        <button type="button" class="maptoggle" id="mapa-przycisk" aria-expanded="false" aria-controls="mapa">Pokaż mapę</button>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Keplera+8%2C+Pozna%C5%84" target="_blank" rel="noopener">Otwórz w Mapach Google</a>
+      </div>
+      <iframe class="map" id="mapa" hidden title="Mapa: ul. Keplera 8, Poznań" referrerpolicy="no-referrer-when-downgrade"
+        data-src="https://maps.google.com/maps?q=Keplera+8%2C+Pozna%C5%84&amp;z=16&amp;output=embed"></iframe>
     </section>
+
+    <div class="box">
+      <div class="scroll"><div id="tabela" class="msg">Ładowanie…</div></div>
+    </div>
+    <div id="status" role="status"></div>
   </main>
 
-  <footer>© KLOCKI.net.pl</footer>
+  <footer>© KLOCKI.net.pl · <a href="index.html">Wróć na stronę główną</a></footer>
 </div>
 
 <script>
   const URL_DANYCH = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRSyzCFELGnHPt0kwgJMx9hgcHspqzl6WY90Lhqh_9hBNFWloCVnGFyMK3_2Akp1lXEDUbPpUAJc6WK/pub?gid=0&single=true&output=csv";
   const CO_ILE_MS = 60000; // odświeżanie co 60 s
 
-  // Parser CSV zgodny ze standardem (RFC 4180): przecinki i cudzysłowy w komórkach są obsłużone
+  // Parser CSV zgodny z RFC 4180: przecinki, cudzysłowy i entery w komórkach
   function parsujCSV(tekst) {
-    if (tekst.charCodeAt(0) === 0xFEFF) tekst = tekst.slice(1); // usuń BOM
+    if (tekst.charCodeAt(0) === 0xFEFF) tekst = tekst.slice(1);
     const wiersze = [];
     let wiersz = [], komorka = "", wCudzyslowie = false;
-
     for (let i = 0; i < tekst.length; i++) {
       const z = tekst[i];
       if (wCudzyslowie) {
@@ -117,18 +135,16 @@ footer{border-top:1px solid var(--line);padding:22px 0 32px;font-size:.9rem;colo
     const tabela = document.createElement("table");
     const thead = document.createElement("thead");
     const tbody = document.createElement("tbody");
-
     wiersze.forEach((w, i) => {
       const tr = document.createElement("tr");
       w.forEach(k => {
         const kom = document.createElement(i === 0 ? "th" : "td");
         if (i === 0) kom.scope = "col";
-        kom.textContent = k;               // dokładnie to, co w CSV, bez wstrzykiwania HTML
+        kom.textContent = k;               // dokładnie to, co w CSV
         tr.appendChild(kom);
       });
       (i === 0 ? thead : tbody).appendChild(tr);
     });
-
     tabela.append(thead, tbody);
     return tabela;
   }
@@ -140,30 +156,32 @@ footer{border-top:1px solid var(--line);padding:22px 0 32px;font-size:.9rem;colo
       const odp = await fetch(URL_DANYCH + "&t=" + Date.now(), { cache: "no-store" });
       if (!odp.ok) throw new Error("HTTP " + odp.status);
       const wiersze = parsujCSV(await odp.text());
-
-      if (wiersze.length === 0) {
-        const p = document.createElement("p");
-        p.className = "empty";
-        p.textContent = "Brak towarów na liście.";
-        kontener.replaceChildren(p);
-      } else {
-        kontener.replaceChildren(zbudujTabele(wiersze));
-      }
+      if (!wiersze.length) throw new Error("Pusty plik");
+      kontener.className = "";
+      kontener.replaceChildren(zbudujTabele(wiersze));
       status.textContent = "Ostatnia aktualizacja: " + new Date().toLocaleTimeString("pl-PL");
     } catch (e) {
       console.error("Błąd odświeżania:", e);
       status.textContent = "Nie udało się odświeżyć danych. Spróbuj ponownie za chwilę.";
-      if (!kontener.querySelector("table")) {
-        const p = document.createElement("p");
-        p.className = "empty";
-        p.textContent = "Nie udało się wczytać listy towarów.";
-        kontener.replaceChildren(p);
-      }
+      if (kontener.className === "msg") kontener.textContent = "Nie udało się wczytać listy towarów.";
     }
   }
 
   odswiez();
   setInterval(odswiez, CO_ILE_MS);
+
+  // Mapa: pokazuj/ukrywaj; zawartość Map Google ładuje się dopiero po pierwszym otwarciu
+  (function () {
+    const przycisk = document.getElementById("mapa-przycisk");
+    const mapa = document.getElementById("mapa");
+    przycisk.addEventListener("click", function () {
+      const bylaOtwarta = !mapa.hidden;
+      if (!bylaOtwarta && !mapa.getAttribute("src")) mapa.setAttribute("src", mapa.dataset.src);
+      mapa.hidden = bylaOtwarta;
+      przycisk.setAttribute("aria-expanded", String(!bylaOtwarta));
+      przycisk.textContent = bylaOtwarta ? "Pokaż mapę" : "Ukryj mapę";
+    });
+  })();
 </script>
 </body>
 </html>
