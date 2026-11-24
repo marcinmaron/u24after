@@ -49,6 +49,13 @@ h1{font-family:var(--head);font-weight:800;font-size:clamp(2.5rem,8vw,5rem);line
 .contact a:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
 .contact .hours{flex:1 1 100%;font-size:.95rem;color:var(--muted)}
 .contact .hours a{font-size:inherit}
+.contact .mapbar{flex:1 1 100%;display:flex;flex-wrap:wrap;align-items:center;gap:4px 24px}
+.contact .maptoggle{font:inherit;font-size:.95rem;font-weight:600;color:var(--blue);background:none;border:0;padding:4px 0;cursor:pointer}
+.contact .maptoggle:hover{text-decoration:underline}
+.contact .maptoggle:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+.contact .mapbar a{font-size:.95rem}
+.contact .map[hidden]{display:none}
+.contact .map{display:block;flex:1 1 100%;width:100%;height:240px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
 
 .thanks{padding:28px 0 0;max-width:62ch}
 .thanks p{margin:0 0 14px}
@@ -86,8 +93,13 @@ footer{border-top:1px solid var(--line);padding:22px 0 32px;font-size:.9rem;colo
         <p><span class="label">E-mail</span><a href="mailto:u24after@gmail.com">u24after@gmail.com</a></p>
         <p><span class="label">Telefon</span><a href="tel:+48532737137">+48 532 737 137</a></p>
         <p class="hours">Prosimy dzwonić w godzinach 16:00–20:00.</p>
-        <p class="hours">Odbiór osobisty po wcześniejszym umówieniu:<br>Poznań, Osiedle Kopernika, ul. Keplera 8.<br>
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Keplera+8%2C+Pozna%C5%84" target="_blank" rel="noopener">Otwórz w Mapach Google</a></p>
+        <p class="hours">Odbiór osobisty po wcześniejszym umówieniu:<br>Poznań, Osiedle Kopernika, ul. Keplera 8.</p>
+        <div class="mapbar">
+          <button type="button" class="maptoggle" id="mapa-przycisk" aria-expanded="false" aria-controls="mapa">Pokaż mapę</button>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Keplera+8%2C+Pozna%C5%84" target="_blank" rel="noopener">Otwórz w Mapach Google</a>
+        </div>
+        <iframe class="map" id="mapa" hidden title="Mapa: ul. Keplera 8, Poznań" referrerpolicy="no-referrer-when-downgrade"
+          data-src="https://maps.google.com/maps?q=Keplera+8%2C+Pozna%C5%84&amp;z=16&amp;output=embed"></iframe>
       </div>
     </section>
 
@@ -95,5 +107,19 @@ footer{border-top:1px solid var(--line);padding:22px 0 32px;font-size:.9rem;colo
 
   <footer>© KLOCKI.net.pl</footer>
 </div>
+<script>
+  // Mapa: pokazuj/ukrywaj; zawartość Map Google ładuje się dopiero po pierwszym otwarciu
+  (function () {
+    const przycisk = document.getElementById("mapa-przycisk");
+    const mapa = document.getElementById("mapa");
+    przycisk.addEventListener("click", function () {
+      const bylaOtwarta = !mapa.hidden;
+      if (!bylaOtwarta && !mapa.getAttribute("src")) mapa.setAttribute("src", mapa.dataset.src);
+      mapa.hidden = bylaOtwarta;
+      przycisk.setAttribute("aria-expanded", String(!bylaOtwarta));
+      przycisk.textContent = bylaOtwarta ? "Pokaż mapę" : "Ukryj mapę";
+    });
+  })();
+</script>
 </body>
 </html>
