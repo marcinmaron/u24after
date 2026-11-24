@@ -63,6 +63,16 @@ tbody tr:hover td{background:var(--head-bg)}
 .msg{padding:24px;color:var(--muted)}
 #status{font-size:.9rem;color:var(--muted);margin:12px 0 0}
 
+@media (max-width:600px){
+  .wrap{padding:0 12px}
+  .contact{padding:16px}
+  table{min-width:0;font-size:.875rem}
+  th,td{padding:8px 6px;overflow-wrap:anywhere}
+  th{white-space:normal}
+  td:first-child,td:last-child,th:first-child,th:last-child{white-space:nowrap}
+  .box{border-left-width:5px}
+}
+
 footer{margin-top:48px;border-top:1px solid var(--line);padding:22px 0 32px;font-size:.9rem;color:var(--muted)}
 footer a{color:var(--blue);font-weight:600;text-decoration:none}
 footer a:hover{text-decoration:underline}
