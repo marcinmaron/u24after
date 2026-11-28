@@ -120,5 +120,16 @@ footer{border-top:1px solid var(--line);padding:22px 0 32px;font-size:.9rem;colo
     });
   })();
 </script>
+
+<script>
+  // Licznik wejść: wysyła do arkusza informację, którą stronę otwarto
+  (function () {
+    var ADRES = "https://script.google.com/macros/s/AKfycbzGl1Li-VYlBMqAkaIbiRsdNJ1LM6VNzYDw7xbngiF-CiYe74UWnbumi6KQirxdxn2X/exec";   // <- tu wklej swój adres /exec
+    var strona = location.pathname.split("/").pop() || "index.html";
+    try {
+      fetch(ADRES + "?p=" + encodeURIComponent(strona), { mode: "no-cors", keepalive: true });
+    } catch (e) {}
+  })();
+</script>
 </body>
 </html>
