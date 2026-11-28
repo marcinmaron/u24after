@@ -122,13 +122,55 @@ footer{border-top:1px solid var(--line);padding:22px 0 32px;font-size:.9rem;colo
 </script>
 
 <script>
-  // Licznik wejść: wysyła do arkusza informację, którą stronę otwarto
+  // Licznik: wysyła do arkusza informację o wejściu i kliknięciach.
+  // Nie zapisuje nic na urządzeniu odwiedzającego (bez cookies).
   (function () {
-    var ADRES = "https://script.google.com/macros/s/AKfycbzGl1Li-VYlBMqAkaIbiRsdNJ1LM6VNzYDw7xbngiF-CiYe74UWnbumi6KQirxdxn2X/exec";   // <- tu wklej swój adres /exec
+    // Adres Twojego wdrożenia Apps Script (zakończony na /exec)
+    var ADRES = "https://script.google.com/macros/s/AKfycbzGl1Li-VYlBMqAkaIbiRsdNJ1LM6VNzYDw7xbngiF-CiYe74UWnbumi6KQirxdxn2X/exec";
+
+    // Nazwa bieżącej strony, np. index.html lub stock.html
     var strona = location.pathname.split("/").pop() || "index.html";
+
+    // Urządzenie: wąski ekran traktujemy jako telefon
+    var urzadzenie = window.innerWidth <= 600 ? "telefon" : "komputer";
+
+    // Źródło: tylko nazwa domeny, z której ktoś przyszedł (bez pełnego adresu,
+    // bo ten może zawierać dane osobowe). Brak odsyłacza = wejście bezpośrednie.
+    var zrodlo = "";
     try {
-      fetch(ADRES + "?p=" + encodeURIComponent(strona), { mode: "no-cors", keepalive: true });
+      zrodlo = document.referrer ? new URL(document.referrer).hostname : "bezposrednio";
     } catch (e) {}
+
+    // Wysyła jedno zdarzenie do arkusza. Błędy są ignorowane,
+    // żeby licznik nigdy nie psuł działania strony.
+    function wyslij(zdarzenie) {
+      try {
+        fetch(ADRES + "?p=" + encodeURIComponent(strona) +
+              "&z=" + encodeURIComponent(zdarzenie) +
+              "&r=" + encodeURIComponent(zrodlo) +
+              "&u=" + urzadzenie,
+              { mode: "no-cors", keepalive: true });
+      } catch (e) {}
+    }
+
+    // 1) Zapisz samo wejście na stronę
+    wyslij("wejscie");
+
+    // 2) Zapisz kliknięcia w wybrane linki i przyciski
+    document.addEventListener("click", function (ev) {
+      var el = ev.target.closest("a, button");   // najbliższy link lub przycisk
+      if (!el) return;
+      var href = el.getAttribute("href") || "";
+      var nazwa = "";                             // nazwa zdarzenia zapisana w arkuszu
+      if (href.indexOf("tel:") === 0) nazwa = "klik_telefon";
+      else if (href.indexOf("mailto:") === 0) nazwa = "klik_mail";
+      else if (href.indexOf("vinted") > -1) nazwa = "klik_vinted";
+      else if (href.indexOf("allegro") > -1) nazwa = "klik_allegro";
+      else if (href.indexOf("google.com/maps") > -1) nazwa = "klik_mapy";
+      else if (href.indexOf("stock.html") > -1) nazwa = "klik_lista";
+      else if (el.id === "mapa-przycisk") nazwa = "klik_pokaz_mape";
+      if (nazwa) wyslij(nazwa);                   // inne kliknięcia są pomijane
+    });
   })();
 </script>
 </body>
